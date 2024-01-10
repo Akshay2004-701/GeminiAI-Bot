@@ -1,4 +1,4 @@
-package com.example.gemini.presentation
+package com.example.gemini.summarize
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

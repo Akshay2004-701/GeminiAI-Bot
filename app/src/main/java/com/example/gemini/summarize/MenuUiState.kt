@@ -1,4 +1,4 @@
-package com.example.gemini.presentation
+package com.example.gemini.summarize
 
 sealed class MenuUiState {
     data object Initial:MenuUiState()
