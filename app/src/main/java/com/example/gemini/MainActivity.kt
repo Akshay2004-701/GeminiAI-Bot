@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.gemini.chat.ChatScreen
+import com.example.gemini.menu.NavGraph
 import com.example.gemini.summarize.QuestionScreen
 import com.example.gemini.ui.theme.GeminiTheme
 
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ChatScreen()
+                    NavGraph()
                 }
             }
         }

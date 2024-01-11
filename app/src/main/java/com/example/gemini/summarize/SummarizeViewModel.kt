@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MenuViewModel:ViewModel() {
+class SummarizeViewModel:ViewModel() {
 
-    private var _uiState = MutableStateFlow<MenuUiState>(MenuUiState.Initial)
+    private var _uiState = MutableStateFlow<SummarizeUiState>(SummarizeUiState.Initial)
     val uiState = _uiState.asStateFlow()
 
     private val config = generationConfig {
@@ -26,7 +26,7 @@ class MenuViewModel:ViewModel() {
     )
 
     fun prompt(userInput:String){
-        _uiState.value = MenuUiState.Loading
+        _uiState.value = SummarizeUiState.Loading
 
         val prompt = "Summarize the following text for me: ${userInput.trim()}"
 
@@ -41,11 +41,11 @@ class MenuViewModel:ViewModel() {
 //                }
                 generativeModel.generateContent(prompt)
                     .text?.let {
-                        _uiState.value = MenuUiState.Success(it)
+                        _uiState.value = SummarizeUiState.Success(it)
                     }
             }
             catch (e:Exception){
-                _uiState.value = MenuUiState.Error(
+                _uiState.value = SummarizeUiState.Error(
                     e.message?:"Unknown error has occurred"
                 )
             }

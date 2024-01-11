@@ -44,10 +44,10 @@ import com.example.gemini.ui.theme.GeminiTheme
 @Composable
 fun QuestionScreen(
     modifier: Modifier = Modifier,
-    viewModel: MenuViewModel = viewModel(),
-    context: Context
-) {
+    viewModel: SummarizeViewModel = viewModel(),
 
+) {
+val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
     var prompt by remember {
         mutableStateOf("")
@@ -107,11 +107,11 @@ fun QuestionScreen(
         }
 
         when(uiState){
-            is MenuUiState.Initial->{
+            is SummarizeUiState.Initial->{
                 // Nothing is shown when Initial
             }
 
-            is MenuUiState.Loading->{
+            is SummarizeUiState.Loading->{
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
@@ -122,7 +122,7 @@ fun QuestionScreen(
                 }
             }
 
-            is MenuUiState.Success->{
+            is SummarizeUiState.Success->{
 
                 Card(
                     modifier = Modifier.padding(16.dp),
@@ -142,7 +142,7 @@ fun QuestionScreen(
                             contentDescription = "Model",
                             )
                         Text(
-                            text = (uiState as MenuUiState.Success).output,
+                            text = (uiState as SummarizeUiState.Success).output,
                             modifier = Modifier.padding(start = 16.dp)
                                 .fillMaxWidth())
                     }
@@ -151,7 +151,7 @@ fun QuestionScreen(
 
             }
 
-            is MenuUiState.Error->{
+            is SummarizeUiState.Error->{
                 Card(
                     modifier = Modifier.padding(16.dp),
                     colors = CardDefaults.cardColors(
@@ -166,7 +166,7 @@ fun QuestionScreen(
                             .padding(16.dp)
                     ) {
                                                Text(
-                            text = (uiState as MenuUiState.Error).error,
+                            text = (uiState as SummarizeUiState.Error).error,
                             modifier = Modifier.padding(start = 16.dp)
                                 .fillMaxWidth())
                     }
@@ -180,8 +180,7 @@ fun QuestionScreen(
 @Preview(showSystemUi = true , showBackground = true)
 @Composable
 fun Qs() {
-    val ctx = LocalContext.current
     GeminiTheme {
-        QuestionScreen(context = ctx)
+        QuestionScreen()
     }
 }
